@@ -13,3 +13,7 @@ mynote/*.lot
 mynote/*.dvi
 mynote/*.spl
 mynote/*.out
+/bin/
+
+.classpath
+.project
