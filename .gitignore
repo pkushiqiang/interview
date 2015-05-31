@@ -1,0 +1,14 @@
+mynote/*.aux
+mynote/*.bak
+mynote/*.sav
+mynote/*.aux
+mynote/*.log
+mynote/*.bbl
+mynote/*.pdf
+mynote/*.blg
+mynote/*.gz
+mynote/*.lof
+mynote/*.toc
+mynote/*.lot
+mynote/*.dvi
+mynote/*.spl
