@@ -12,6 +12,14 @@ mynote/*.toc
 mynote/*.lot
 mynote/*.dvi
 mynote/*.spl
+mynote/*.ilg
+mynote/*.bcf
+mynote/*.ptc
+mynote/*.xml
+mynote/*.idx
+mynote/*.xml
+mynote/*.ind
+
 mynote/*.out
 /bin/
 
