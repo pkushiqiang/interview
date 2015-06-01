@@ -29,29 +29,29 @@ We only list bit manipulation related types.
 \end{tabular}
 \label{tab:java_types} % is used to refer this table in the text
 
-\end{table}
+\end{table} 
+
+\subsection{Two's complement }
+In two's complement notation, a non-negative number is represented by its ordinary binary representation; in this case, the most significant bit is 0. Though, the range of numbers represented is not the same as with unsigned binary numbers. For example, an 8-bit unsigned number can represent the values 0 to 255 (11111111). However a two's complement 8-bit number can only represent positive integers from 0 to 127 (01111111), because the rest of the bit combinations with the most significant bit as '1' represent the negative integers -1 to -128.
+
+The two's complement of a negative number is the corresponding positive value. For example, inverting the bits of -5 ( 1111 1011) gives:  \\
+0000 0100  \\
+And adding one gives the final value:  \\
+0000 0101  \\
+
+\subsection{Java bit Operators  }
 
 Some important things we need to remember:
 \begin{enumerate}
-    \item   Java has no signed types like in C/C++
+    \item Java has no signed types like in C/C++    
 
-    \item   a
+    \item   ${\sim0}$ is all 1s
 
-    \item
-
-\end{enumerate}
-
-\subsection{Ones' complement } 
-
-\subsection{Java bit Operators  } 
-
-Some important things we need to remember:
-\begin{enumerate}
-    \item   Java has singed shift (${>>}$) and unsigned shift  (${>>>}$) operators. In the most case, just use unsigned shift  (${>>>}$). 
-
-    \item   ${\sim0}$ is all 1s 
-
-    \item In Java the highest bit is the signed bit, so even a negative number n's 31th bit is 1, ${  ( n \& (1 << 31 ) )}$ still less then zero, so use ${  (  n \& (1 << 31 ) ) >> 31 }$ to get the bit. 
+    \item In Java using signed \href{http://mitpress.mit.edu/books/introduction-algorithms}{two's complement}  to represent Integer which means the most significant bit is the signed bit, so even a negative number n's 31th bit is 1, ${  ( n \& (1 << 31 ) )}$ still less then zero, so use ${  (  n \& (1 << 31 ) ) >> 31 }$ to get the bit.
+        
+    \item   Java has singed shift (${>>}$) and unsigned shift  (${>>>}$) operators. In the most case, just use unsigned shift  (${>>>}$).
+        
+    \item Most bit operation's priority are very low, so add parenthesises around them.  
 
 \end{enumerate}
 
