@@ -43,6 +43,18 @@ public class BasicBitOps {
 		return (num & mask) | ( v << pos );
 	}
 	
+	public static long getUnsignedInt(int x){		 
+		long mask =  0xffffffffL;
+		return   x & mask;		 
+	}
+	
+	public static void testGetUnsignedInt(){
+		int x=-16;
+		long xl = getUnsignedInt(x);
+		System.out.println( Integer.toBinaryString(x) + "  :  " + x);
+		System.out.println( Long.toBinaryString(xl) + "  :  " + xl);
+	}
+	
 	public static void testFlipBits(){
 		int x = 4+2+1;
 		System.out.println(Integer.toBinaryString(x));
@@ -90,7 +102,7 @@ public class BasicBitOps {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		testFlipBits();
+		testGetUnsignedInt();
 	}
 
 }
