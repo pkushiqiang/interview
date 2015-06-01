@@ -3,7 +3,7 @@ package mynote.learnbit;
 public class BasicBitOps {
 	
 	public static int getBit(int num, int pos){
-		return ( num & (1<<pos) ) > 0 ? 1:0 ;
+		return ( ( num & (1<<pos) ) >>> pos )> 0 ? 1:0 ;
 	}
 	
 	public static boolean isOne(int num, int pos){
@@ -86,8 +86,9 @@ public class BasicBitOps {
 	
 	public static void testGetBit(){
 		int i= 16+4 + 2 + 1 ;
+		i= Integer.MIN_VALUE;
 		System.out.println(Integer.toBinaryString(i));	
-		for (int j=0; j<16; j++){
+		for (int j=0; j<32; j++){
 			System.out.println(j + ":" + getBit(i,j));	
 		}
 	}
@@ -102,7 +103,7 @@ public class BasicBitOps {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		testGetUnsignedInt();
+		testGetBit();
 	}
 
 }

@@ -4,7 +4,7 @@
 
 
 \section{Java Tips  }
-\subsection{Java Primitive  Types  } 
+\subsection{Java Primitive  Types } 
 
 
 We only list bit manipulation related types.
@@ -41,15 +41,17 @@ Some important things we need to remember:
 
 \end{enumerate}
 
+\subsection{Ones' complement } 
+
 \subsection{Java bit Operators  } 
 
 Some important things we need to remember:
 \begin{enumerate}
-    \item   Java has singed shift (${<<}$) and unsigned shift  (${<<<}$) operators
+    \item   Java has singed shift (${>>}$) and unsigned shift  (${>>>}$) operators. In the most case, just use unsigned shift  (${>>>}$). 
 
     \item   ${\sim0}$ is all 1s 
 
-    \item
+    \item In Java the highest bit is the signed bit, so even a negative number n's 31th bit is 1, ${  ( n \& (1 << 31 ) )}$ still less then zero, so use ${  (  n \& (1 << 31 ) ) >> 31 }$ to get the bit. 
 
 \end{enumerate}
 
@@ -77,8 +79,8 @@ Some important things we need to remember:
 
 Get basic tasks
 \begin{lstlisting} 
-public static int getBit(int num, int pos){
-		return ( num & (1<<pos) ) > 0 ? 1:0 ;
+    public static int getBit(int num, int pos){
+		return ( ( num & (1<<pos) ) >>> pos )> 0 ? 1:0 ;
 	}
 	
 	public static boolean isOne(int num, int pos){
@@ -117,7 +119,16 @@ public static int getBit(int num, int pos){
 		int mask = ~(1 << pos );
 		return (num & mask) | ( v << pos );
 	}
+
+    public static long getUnsignedInt(int x){		
+		long mask =  0xffffffffL;
+		return   x & mask;		
+	}
+
 \end{lstlisting}
+
+More complete bit hack can be found here: 
+\href{http://graphics.stanford.edu/~seander/bithacks.html}{Bit Hacks}.
 
 \section{Interview Preparation Books }
 
