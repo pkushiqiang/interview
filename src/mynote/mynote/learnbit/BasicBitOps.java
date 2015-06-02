@@ -2,8 +2,13 @@ package mynote.learnbit;
 
 public class BasicBitOps {
 	
-	public static int getBit(int num, int pos){
+	public static int getIntBit2(int num, int pos){
 		return ( ( num & (1<<pos) ) >>> pos )> 0 ? 1:0 ;
+	}
+	
+	public static int getIntBit(int num, int pos){
+		int mask = 1<<pos;
+		return ( num & mask ) == mask ? 1:0 ;
 	}
 	
 	public static boolean isOne(int num, int pos){
@@ -89,7 +94,7 @@ public class BasicBitOps {
 		i= Integer.MIN_VALUE;
 		System.out.println(Integer.toBinaryString(i));	
 		for (int j=0; j<32; j++){
-			System.out.println(j + ":" + getBit(i,j));	
+			System.out.println(j + ":" + getIntBit(i,j));	
 		}
 	}
 	
