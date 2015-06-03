@@ -4,7 +4,7 @@
 
 
 \section{Java Tips  }
-\subsection{Java Primitive  Types } 
+\subsection{Java Primitive  Types }
 
 
 We only list bit manipulation related types.
@@ -29,7 +29,19 @@ We only list bit manipulation related types.
 \end{tabular}
 \label{tab:java_types} % is used to refer this table in the text
 
-\end{table} 
+\end{table}
+
+Some important things we need to remember:
+\begin{enumerate}
+    \item  Math.abs(Integer.MIN\_VALUE) is still a negative number(the same value)
+
+    \item    0b10000000000000000000000000000000 is -2147483648
+
+    \item  0b11111111111111111111111111111111 is -1
+
+    
+
+\end{enumerate}
 
 \subsection{Two's complement }
 In two's complement notation, a non-negative number is represented by its ordinary binary representation; in this case, the most significant bit is 0. Though, the range of numbers represented is not the same as with unsigned binary numbers. For example, an 8-bit unsigned number can represent the values 0 to 255 (11111111). However a two's complement 8-bit number can only represent positive integers from 0 to 127 (01111111), because the rest of the bit combinations with the most significant bit as '1' represent the negative integers -1 to -128.
@@ -40,15 +52,15 @@ In two's complement notation, a non-negative number is represented by its ordina
 
 Some important things we need to remember:
 \begin{enumerate}
-    \item Java has no signed types like in C/C++    
+    \item Java has no signed types like in C/C++
 
     \item   ${\sim0}$ is all 1s
 
     \item In Java using signed \href{http://mitpress.mit.edu/books/introduction-algorithms}{two's complement}  to represent Integer which means the most significant bit is the signed bit, so even a negative number n's 31th bit is 1, ${  ( n \& (1 << 31 ) )}$ still less then zero, so use ${  (  n \& (1 << 31 ) ) >> 31 }$ to get the bit.
-        
+
     \item   Java has singed shift (${>>}$) and unsigned shift  (${>>>}$) operators. In the most case, just use unsigned shift  (${>>>}$).
-        
-    \item Most bit operation's priority are very low, so add parenthesises around them.  
+
+    \item Most bit operation's priority are very low, so add parenthesises around them.
 
 \end{enumerate}
 
@@ -65,17 +77,17 @@ Some important things we need to remember:
  \hline
         ${x ~ op  ~x  }$     & ${x \wedge x =0 }$         &  ${x~\&~x = x}$   &   ${x~\mid~x = x}$     \\
  \hline
-        
+
 
 \end{tabular}
 \label{tab:bit_opt} % is used to refer this table in the text
 
 \end{table}
 
-\subsection{ Basic bit  tasks  } 
+\subsection{ Basic bit  tasks  }
 
 Some basic tasks
-\begin{lstlisting} 
+\begin{lstlisting}
     public static int getBit(int num, int pos){
 		return ( ( num & (1<<pos) ) >>> pos )> 0 ? 1:0 ;
 	}
@@ -124,10 +136,10 @@ Some basic tasks
 
 \end{lstlisting}
 
-More complete bit hack can be found here: 
+More complete bit hack can be found here:
 \href{http://graphics.stanford.edu/~seander/bithacks.html}{Bit Hacks}.
 
-\section{ Classical Problems } 
+\section{ Classical Problems }
 
 \subsection{ Use bits to represent longer information }
 
@@ -137,11 +149,11 @@ More complete bit hack can be found here:
 \end{enumerate}
 
 \subsection{ Signed Integer }
- 
-\begin{enumerate}
-    \item LeetCode 191: Number of 1 Bits 
 
-    \item LeetCode 169: Majority Element 
+\begin{enumerate}
+    \item LeetCode 191: Number of 1 Bits
+
+    \item LeetCode 169: Majority Element
 
     \item LeetCode 190:	Reverse Bits
 
@@ -167,16 +179,16 @@ More complete bit hack can be found here:
 %
 %扩展二：
 %
-%给定一个包含n个整数的数组，有一个整数x出现b次，一个整数y出现c次，其他所有的数均出现a次，其中b和c均不是a的倍数，找出x和y。使用二进制模拟a进制，累计二进制位1出现的次数，当次数达到a时，对其清零，这样可以得到b mod a次x，c mod a次y的累加。遍历剩余结果（用ones、twos、fours...变量表示）中每一位二进制位1出现的次数，如果次数为b mod a 或者 c mod a，可以说明x和y的当前二进制位不同（一个为0，另一个为1），据此二进制位将原数组分成两组，一组该二进制位为1，另一组该二进制位为0。这样问题变成“除了一个整数出现a1次（a1 = b 或 a1 = c）外所有的整数均出现a次”，使用和上面相同的方式计算就可以得到最终结果，假设模拟a进制计算过程中使用的变量为ones、twos、fours...那么最终结果可以用ones | twos | fours ...表示。
+%给定一个包含n个整数的数组，有一个整数x出现b次，一个整数y出现c次，其他所有的数均出现a 次，其中b和c均不是a的倍数，找出x和y。使用二进制模拟a进制，累计二进制位1出现的次数，当次数达到a时，对其清零，这样可以得到b mod a 次x，c mod a次y的累加。遍历剩余结果（用ones、twos、fours...变量表示）中每一位二进制位1出现的次数，如果次数为b mod a 或者 c mod a，可以说明x和y的当前二进制位不同（一个为0，另一个为1），据此二进制位将原数组分成两组，一组该二进制位为1，另一组该二进制位为0。这样问题变成“除了一个整数出现a1次（a1 = b 或 a1 = c）外所有的整数均出现a次”，使用和上面相同的方式计算就可以得到最终结果，假设模拟a进制计算过程中使用的变量为ones、twos、fours...那么最终结果可以用ones | twos | fours ...表示。
 
 
 \end{enumerate}
 
-\section{ My Problems } 
+\section{ My Problems }
 
-\subsection{ Reverse Bits } 
+\subsection{ Reverse Bits }
 
 \begin{enumerate}
     \item How to reverse 5 bytes bits?
-	\item How to reverse 27 bits in 4 bytes?  
+	\item How to reverse 27 bits in 4 bytes?
 \end{enumerate}
