@@ -57,8 +57,7 @@ public class LearnBitmap {
 		int mask =  1<<(7 - x % 8);
 		 
 		for (int i=y1; i<=y2; i++)
-			screen[i*byofrow+startByte] |= mask;		
-	//	 
+			screen[i*byofrow+startByte] |= mask;			 
 	}
 	
 	public static void hReverse (byte[] A, int width){
@@ -94,6 +93,43 @@ public class LearnBitmap {
 		}
 	}
 	
+	public static void setPoint(byte[] A, int w, int x, int y, int v){
+		int lr = w/8;
+		int bi = lr*y+x/8;
+		int pos = 7-(x%8);
+		int mask = ~(1 <<  pos);
+		A[bi] = (byte) ( (A[bi]&mask) | ( v << pos)) ;
+	}
+	
+	public static int  getPoint(byte[] A, int w, int x, int y){
+		int lr = w/8;
+		int bi = lr*y+x/8;
+		int pos = 7 - (x%8);
+		int mask = 1 <<  pos;
+		return  (A[bi] & mask) == 0 ? 0:1;
+	}
+	
+	public static void drawRect(byte[] A, int width, int x1, int y1, int x2, int y2){
+		for (int i=y1 ; i<=y2; i++){
+			drawHLine(A,width,x1,x2,i);
+		}
+	}
+	
+	public static byte[] rotateClockwise(byte[] A, int wa){
+		byte[] B = new byte[A.length];
+		int lra = wa/8;
+		int ha = A.length/lra;	
+		int wb = ha;
+		
+		for (int i=0; i<ha; i++) 
+			for (int j=0; j<wa; j++) {				
+				int v = getPoint(A, wa, j, i);
+				setPoint(B, wb,  ha-1-i, j, v );
+			}
+		
+		return B;
+	}
+	
 	public static void test1(){
 		byte[] A = createBitmap(16,8);
 		String str = drawBitmap(A,16);
@@ -118,13 +154,17 @@ public class LearnBitmap {
 		drawVLine(A, width, 21,4,5);
 		drawHLine(A, width, 0,15,0);
 		drawHLine(A, width, 1,14,2);
+		
+		for (int j=2; j<=5; j++)
+			setPoint(A, width, j, 5, 1);		
 		System.out.println(drawBitmap(A,width));
+		for (int j=0; j<=5; j++)
+			System.out.println(  "23:"+j +" is " + getPoint(A, width, 23, j));
 	}
 	
 	public static void test3(){
 		int width = 24;
-		byte[] A = createBitmap(width,9);	 
-		
+		byte[] A = createBitmap(width,9); 
 
 		drawVLine(A, width, 2,2,6);
 		drawVLine(A, width, 4,4,8);		
@@ -140,11 +180,31 @@ public class LearnBitmap {
 		vReverse(A,width);
 		System.out.println(" -----  vertical flip ---");
 		System.out.println(drawBitmap(A,width));
+		
+		System.out.println(" -----  clockwise rotate  ---");
+		byte[] B = rotateClockwise(A,width);
+		System.out.println(drawBitmap(B, A.length*8/width));
+	}
+	
+	public static void test4(){
+		int width = 16;
+		byte[] A = createBitmap(width,16); 
+
+		drawRect(A, width, 0,0,12,12);		
+		System.out.println(drawBitmap(A,width));
+		
+		System.out.println(" -----  clockwise rotate  ---");
+		byte[] B = rotateClockwise(A,width);
+		System.out.println(drawBitmap(B, A.length*8/width));
+		
+		System.out.println(" -----  clockwise rotate  ---");
+		byte[] C = rotateClockwise(B,A.length*8/width);
+		System.out.println(drawBitmap(C, width));
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		test3();
+		test4();
 	}
 
 }
