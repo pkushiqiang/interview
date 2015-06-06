@@ -39,7 +39,7 @@ Some important things we need to remember:
 
     \item  0b11111111111111111111111111111111 is -1
 
-    
+    \item  To test if end loop use $(c != 0 )$ not $( c > 0)$, e.g. LintCode: Flip Bits,
 
 \end{enumerate}
 
@@ -60,7 +60,7 @@ Some important things we need to remember:
 
     \item   Java has singed shift (${>>}$) and unsigned shift  (${>>>}$) operators. In the most case, just use unsigned shift  (${>>>}$).
 
-    \item Most bit operation's priority are very low, so add parenthesises around them.
+    \item Most bit operation's priority are very low, so add parenthesises around them. like you must write if ( (num\&1) != 0 ) , not    if ( num\&1 != 0 ).
 
 \end{enumerate}
 
