@@ -62,6 +62,13 @@ public class BitBasic {
 		int a = ~0;
 		System.out.println(Integer.toBinaryString(a));
 	}
+	
+	public static void optPriority(){
+		int num=0;
+	//	if ( num&1 != 0 ){ // error for & priory is lower than !=
+		if ( ( num&1 ) != 0 ) {
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
