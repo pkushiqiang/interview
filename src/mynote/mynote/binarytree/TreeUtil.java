@@ -151,10 +151,24 @@ public class TreeUtil {
 		
 		
 	}
+	
+	public static void  test2(){
+		String str1 = "{1,2,3,4,5,#,#,6,7}";
+		TreeNode root = deSerialize(str1);
+		String str2 = serialize(root);
+		System.out.println(str1);
+		System.out.println(str2);
+		System.out.println(preOrder(root));
+		System.out.println(inOrder(root));
+		System.out.println(postOrder(root));
+		System.out.println(levelOrder(root));
+		
+		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		test1();
+		test2();
 	}
 
 }
