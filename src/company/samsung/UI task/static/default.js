@@ -88,7 +88,7 @@ function overHighlight(eid) {
     var pic = document.getElementById("pic");        
     var descDiv = document.getElementById("desc");
     
-    titleDiv.innerHTML = '<h2>' + entity.title +'</h2>';
+    titleDiv.innerHTML = '<h3>' + entity.title +'</h3>';
     descDiv.innerHTML =  entity.description ;
     pic.src = entity.image;
    
