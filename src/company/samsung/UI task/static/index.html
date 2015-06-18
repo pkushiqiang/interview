@@ -62,9 +62,9 @@
     <p>This is a paragraph.</p>
 
 
-    <div   id='editor' class='span9' onchange="render()"  contenteditable="true" >
-        <span style="color:red">FBI</span>
-        Blue's Clues is an American children's television series  Dundee that premiered 
+    <div   id='editor' class='span9' onkeyup="render()"  contenteditable="true" >
+      
+Blue's Clues is an American children's television series  Dundee that premiered 
         on Nickelodeon in 1996.  Libya Rajasthan Hosted first by Steve Burns (pictured) and then
          by Donovan Patton, and produced by Scottish Parliament, Todd Kessler and 
          Traci Paige  Gabriela Shalev Johnson, the show follows an animated blue-spotted dog named 
@@ -74,7 +74,6 @@
          series for preschoolers, and Child pornography resembles a storybook in its use of primary 
          colors and its simple construction paper shapes of familiar objects with 
          varied colors and textures.
-
 
 	</div  >
     
@@ -91,7 +90,7 @@
 
 </body>
 
-<script>
+<script>   
     
     function render(){
         var editorDiv = document.getElementById("editor");
@@ -99,7 +98,7 @@
         var content = editorDiv.innerHTML;
    // console.log(content);
         content =  content.replace(/<(?:.|\n)*?>/gm, '');
-   // console.log(content);
+        console.log(content);
     
         for ( var i=0; i<titles.length; i++){
             var title = titles[i];
@@ -108,9 +107,12 @@
                 var eid = entitiesMap[title];
                 var event = 'onclick="clickHighlight('+eid+')"  onmouseover="overHighlight('+eid+')"';
                 var span = '<span ' + event + 'style="color:red"  data-entity-id="' + eid + '" >' + title + '</span>';
-                content = content.replace(title, span);
+                var reg = new RegExp(title,"g");
+                console.log(reg);
+                content = content.replace( reg , span);              
             }
         }
+        
         editorDiv.innerHTML =  content;
     }
     
