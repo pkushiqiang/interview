@@ -15,12 +15,17 @@
 </head>
 
 <body onload="pageInit()">
-    <h1> Identify the Entities in Text </h1>
-    <p style="margin-left: 50px;"> Please input or paste some text below.</p>
-
-
-    <div   id='editor' class='span9'  onblur="render()" onpaste="editorPaste()" contenteditable="true" >
-Blue's Clues is an American children's television series  Dundee that premiered 
+    <div class="page-header text-center">
+        <h2> Identify the Entities in Text </h2>
+    </div>
+    
+    <div id="main-panel" class="panel panel-default" >
+      <div class="panel-heading">
+        <h3 class="panel-title">Please input or paste some text below</h3>
+      </div>
+      <div class="panel-body">
+        <div   id='editor' class='span9'  onblur="render()" onpaste="editorPaste()" contenteditable="true" >
+        Blue's Clues is an American children's television series  Dundee that premiered 
         on Nickelodeon in 1996.  Libya Rajasthan Hosted first by Steve Burns (pictured) and then
          by Donovan Patton, and produced by Scottish Parliament, Todd Kessler and 
          Traci Paige  Gabriela Shalev Johnson, the show follows an animated blue-spotted dog named 
@@ -31,7 +36,13 @@ Blue's Clues is an American children's television series  Dundee that premiered
          colors and its simple construction paper shapes of familiar objects with 
          varied colors and textures.  
 
-	</div  >
+            </div  >
+      </div>
+    </div>
+    
+
+
+    
     
     <div id="info" >
         <div id="title" > </div>
