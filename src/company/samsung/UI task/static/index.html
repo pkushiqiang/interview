@@ -57,17 +57,17 @@
 
 </head>
 
-<body>
+<body onload="render()">
     <h1>This is a Heading</h1>
     <p>This is a paragraph.</p>
 
 
-    <div id='editor' class='span9'   contenteditable="true" >
+    <div   id='editor' class='span9' onchange="render()"  contenteditable="true" >
         <span style="color:red">FBI</span>
         Blue's Clues is an American children's television series  Dundee that premiered 
         on Nickelodeon in 1996.  Libya Rajasthan Hosted first by Steve Burns (pictured) and then
-         by Donovan Patton, and produced by Angela Santomero, Todd Kessler and 
-         Traci Paige Scottish Parliament Gabriela Shalev Johnson, the show follows an animated blue-spotted dog named 
+         by Donovan Patton, and produced by Scottish Parliament, Todd Kessler and 
+         Traci Paige  Gabriela Shalev Johnson, the show follows an animated blue-spotted dog named 
          Blue as she plays a game with the host and viewers, inviting their 
          involvement. A product Ken Mehlman of extensive Sledge hockey research in United States National Security Council child development and 
          early-childhood Carolyn Maloney Fairfax Media  education, Blue's Clues was the first cutout animation 
@@ -76,25 +76,42 @@
          varied colors and textures.
 
 
-	</div>
+	</div  >
+    
+    <div id="info" >
+        <div id="title" > </div>
+        <div  > 
+            <img   id="pic"  style="width:304px;height:228px;">
+        </div>
+        <div id="desc" > 
+            
+        </div>
+    </div>
     
 
 </body>
 
 <script>
     
-    function render(content){
+    function render(){
+        var editorDiv = document.getElementById("editor");
+    //    console.log(editorDiv);     
+        var content = editorDiv.innerHTML;
+   // console.log(content);
+        content =  content.replace(/<(?:.|\n)*?>/gm, '');
+   // console.log(content);
+    
         for ( var i=0; i<titles.length; i++){
             var title = titles[i];
             var p = content.indexOf(title);
             if ( p != -1 ) {
                 var eid = entitiesMap[title];
-                var event = 'onclick="clickHighlight('+eid+')"';
+                var event = 'onclick="clickHighlight('+eid+')"  onmouseover="overHighlight('+eid+')"';
                 var span = '<span ' + event + 'style="color:red"  data-entity-id="' + eid + '" >' + title + '</span>';
                 content = content.replace(title, span);
             }
         }
-        return content;
+        editorDiv.innerHTML =  content;
     }
     
     function clickHighlight(eid) {
@@ -105,13 +122,21 @@
         win.focus();
     }
     
-    var editorDiv = document.getElementById("editor");
-    //    console.log(editorDiv);     
-    var content = editorDiv.innerHTML;
-   // console.log(content);
-    content =  content.replace(/<(?:.|\n)*?>/gm, '');
-   // console.log(content);
-    editorDiv.innerHTML = render(content);
+    function overHighlight(eid) {
+        var entity = entitydb[eid];
+        var url = entity.url;
+        console.log(entity.title);
+        titleDiv = document.getElementById("title");
+        pic = document.getElementById("pic");
+        descDiv = document.getElementById("desc");
+        
+        titleDiv.innerHTML = '<h2>' + entity.title +'</h2>';
+        descDiv.innerHTML =  entity.description ;
+        pic.src = entity.image;
+    }
+    
+    
+    
 
 </script>
 
