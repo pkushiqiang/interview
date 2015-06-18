@@ -4223,13 +4223,3 @@
 {"id":46530,"url":"http://en.wikipedia.org/wiki/Human_Rights_Watch","title":"Human Rights Watch","description":"Human Rights Watch is an international non-governmental organization that conducts research and advocacy on human rights. Its headquarters are in New York City and it has offices in Amsterdam, Berlin, Brussels, Chicago, Geneva, Johannesburg, London, Los Angeles, Moscow, Paris, San Francisco, Tokyo, Toronto, and Washington. As of June 2011, the organization���s annual expenses totaled $50.6 million. The George Soros Open Society Foundation is the primary donor of the Human Rights Watch, contributing $100 million of $128 million of contributions and grants received by the HRW in the 2011 financial year.See page 16 for the Open Society Foundation\u0027s contribution The $100 million contribution from the Open Society Foundation will be paid out over ten years in $10 million annual installments.","image":"http://wikiname2image.herokuapp.com/Human_Rights_Watch"},
 {"id":30849,"url":"http://en.wikipedia.org/wiki/Toledo,_Ohio","title":"Toledo, Ohio","description":"Toledo is the fourth most populous city in the U.S. state of Ohio and is the county seat of Lucas County. Toledo is in northwest Ohio, on the western end of Lake Erie, and borders the State of Michigan. The city was founded in 1833 on the west bank of the Maumee River, then re-founded in 1837, after conclusion of the Toledo War. Toledo grew quickly as a result of the Miami and Erie Canal and its position on the railway line between New York and Chicago. It has since become a city well known for its industry, particularly in glass and auto assembly, as well as for its art community, education, healthcare, and local sports teams. The population of Toledo as of the 2010 Census was 287,208, while the Toledo metropolitan area had a population of 651,429.","image":"http://wikiname2image.herokuapp.com/Toledo,_Ohio"}
 ];
-     
-     var  entitiesMap = {};
-     var  titles = [];
-     for (  var i=0; i<entitydb.length; i++ ) {
-         var obj = entitydb[i];
-         entitiesMap[obj.title] = i;
-         titles.push(obj.title);
-      //   console.log(obj);
-     }
-     console.log(titles);
