@@ -72,14 +72,46 @@ body {
 }
 
 
- #container {
-    position:         relative;
-    width : 1300px;
-   
-    border:           1px solid #FF0000;    
+#container {
+    position:  relative;
+    border:1px solid silver; 
+    border-radius:5px;  
+    box-shadow: inset 0 0 10px silver;
+    padding:3px;
+    
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    
+    width:640px;
     height:auto;  
     resize:vertical; 
 }
+
+#inputArea  {
+    position:         relative;
+    background-color: transparent;
+    padding:          0px;
+    margin:           0px;
+  
+    width:            600px;
+    min-height:       400px;   
+    
+    left:             0px;
+    top:              0px;    
+    font-family: "Courier New", Monospace;   
+    font-size: 16px;
+    
+    border:           1px solid transparent;
+    
+    opacity:0.4;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space:pre;
+    resize:none; 
+    overflow:auto; 
+} 
   
                         
 #highlighter  {
@@ -89,7 +121,7 @@ body {
     position:         absolute;
     left:             30px;
     top:              30px;
-    border:           1px solid #000000;
+    border:           1px solid transparent;
     width:            600px;
     
     
@@ -123,29 +155,9 @@ body {
     white-space:pre;
     resize:vertical;
     min-height:       400px;  
+    
+    display: none;
 }
                        
-#inputArea  {
-    position:         relative;
-    background-color: transparent;
-    padding:          0px;
-    margin:           0px;
-  
-    width:            600px;
-    min-height:       400px;   
-    
-    left:             30px;
-    top:              30px;    
-    font-family: "Courier New", Monospace;   
-    font-size: 16px;
-    
-    border:           1px solid transparent;
-    
-    opacity:0.4;
-    word-wrap: break-word;
-    word-break: normal;
-    white-space:pre;
-    resize:none; 
-    overflow:auto; 
-} 
+
 

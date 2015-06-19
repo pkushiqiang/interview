@@ -18,7 +18,51 @@ var rects ;
 
 var curSpan;
 
+var observe;
+if (window.attachEvent) {
+    observe = function (element, event, handler) {
+        element.attachEvent('on'+event, handler);
+    };
+} else {
+    observe = function (element, event, handler) {
+        element.addEventListener(event, handler, false);
+    };
+}
+
 initEntites();
+
+function initInputArea() {
+    var text = document.getElementById('inputArea');
+    function resize () {
+        text.style.height = 'auto';
+        text.style.height = text.scrollHeight+'px';
+    }
+    /* 0-timeout to get the already changed text */
+    function delayedResize () {
+        window.setTimeout(resize, 0);
+    }
+  //  observe(text, 'change',  resize);
+    observe(text, 'cut',     delayedResize);
+    observe(text, 'paste',   delayedResize);
+    observe(text, 'drop',    delayedResize);
+    observe(text, 'keydown', delayedResize);
+    
+    observe(text, 'input',  resize);
+   /*
+    text.focus();
+    text.select();
+    resize();
+    
+    */
+}
+
+function adjustHighlighter(){   
+    console.log(inputArea.offsetLeft);
+    highlighter.style.left = inputArea.offsetLeft+"px";
+    highlighter.style.top = inputArea.offsetTop+"px";
+    highlighter.style.height = inputArea.offsetHeight+"px";
+    highlighter.style.width = inputArea.offsetWidth+"px";
+}
 
 function initEntites(){
      for (  var i=0; i<entitydb.length; i++ ) {
@@ -52,7 +96,8 @@ function pageInit(){
     copyDiv = document.getElementById("copy");
     infoDiv = document.getElementById("info");
             
-    init();        
+    initInputArea();   
+    adjustHighlighter();     
             
     txtChange();
     oldContent = inputArea.value;
@@ -92,7 +137,7 @@ function txtChange(){
 }
 
 function scanHigh(){
-    console.log(highlighter.children); 
+  //  console.log(highlighter.children); 
     spans = [];
     
     for (var i =0 ; i< highlighter.children.length ;i++) {
@@ -100,12 +145,10 @@ function scanHigh(){
         var name = ele.tagName;
      //    console.log(name);
         if ( name == "SPAN") {
-            spans.push(ele);
-            var rect = ele.getBoundingClientRect();
-            console.log(rect.left, rect.right, rect.top, rect.bottom);
+            spans.push(ele);          
         }
     }
-    console.log(spans);    
+  //  console.log(spans);    
     rects = []; 
 }
 
@@ -166,7 +209,7 @@ function showInOthers(content){
 
 function getShowText(content){
     
-    console.log(content);
+  //  console.log(content);
     var lowContent = content.toLowerCase();
     var ranges = [];
     var found = [];
@@ -184,7 +227,7 @@ function replaceEntity(content, found ){
     found.sort( function compare(a , b) {
         return a.range[0] - b.range[0];
     });
-    console.log(found);
+  //  console.log(found);
      
     var newContent ='';
     var p = 0;
