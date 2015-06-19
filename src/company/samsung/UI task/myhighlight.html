@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        
+        <style>
+            
+        #container {
+            position:         absolute;
+            left: 50px;
+            top: 100px;
+            border:           1px solid #000000;
+        }
+        
+        #highlighterContainer {
+            position:         absolute;
+            left:             0px;
+            top:              0px;
+            border:           1px dashed #ff0000;
+            width:            660px;
+            height:           460px;
+            cursor:           text;
+        } 
+                                
+        #highlighter  {
+            position:         absolute;
+            left:             30px;
+            top:              30px;
+            border:           1px solid #000000;
+            width:            600px;
+            height:           400px;
+            
+            padding:          0px;
+            margin:           0px;
+        }
+                                
+        
+        #copy  {
+            
+            position:         absolute;
+            left:             660px;
+            top:              30px;
+            border:           1px solid #000000;
+            width:            600px;
+            height:           400px;
+        }
+                               
+        #txt  {
+            position:         absolute;
+            background-color: #c3c6c8;
+            padding:          0px;
+            margin:           0px;
+          
+            width:            600px;
+            height:           400px;   
+            
+            left:             30px;
+            top:              30px;       
+        } 
+        
+        </style>
+        
+        
+         
+    </head>
+    <body>
+
+        <div id="container">
+            
+                <div id="highlighter">
+
+                </div>
+                
+                <div id="copy">
+
+                </div>
+           
+                <textarea id="txt" oninput="txtChange()" >some hello or hello world </textarea>
+                
+                
+           
+        </div>
+    
+    </body>
+    
+    <script type="text/javascript">
+            var txt = document.getElementById("txt");
+            var highlighter = document.getElementById("highlighter");
+            var copyDiv = document.getElementById("copy");
+            
+            function txtChange(){
+                var content = txt.value;
+                console.log(content);
+                
+                showInOthers(content);
+            }
+            
+            function showInOthers(content){
+                var span = '<span style="color: red;" >hello</span>';
+                newContent = content.replace( /hello/g , span);  
+                highlighter.innerHTML =   newContent;
+                copy.innerHTML =   newContent;
+            };
+
+
+    </script>
+</html>
