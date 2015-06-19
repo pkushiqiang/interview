@@ -6,8 +6,36 @@ var infoDiv ;
 var cursorX;
 var cursorY;
 
-function pageInit(){
+var  entitiesMap = {};
+var  titles = [];
+
+function initEntites(){
+     for (  var i=0; i<entitydb.length; i++ ) {
+         var obj = entitydb[i];
+         entitiesMap[obj.title.toLowerCase()] = i;
+         titles.push(obj.title.toLowerCase());
+       //  console.log(obj.title);
+     }
+     
+     titles.sort( function (a , b) {
+         if ( a.length > b.length ) {
+             return -1;
+         } else if ( a.length < b.length ) {
+             return 1;
+         } else {
+             return a - b;
+         } 
+     }); 
+     /* 
+     for (var i=0; i< titles.length; i++){
+         console.log(titles[i]);
+     }  
+     * */  
+}
     
+
+function pageInit(){
+    initEntites();
  //   console.log(oldContent);
     editorDiv = document.getElementById("editor");
     infoDiv = document.getElementById("info");
@@ -44,27 +72,86 @@ function render(){
         
   //  console.log(content);
    // content =  content.replace(/<(?:.|\n)*?>/gm, '');
-    content =  content.replace(/<span*?>/gm, '');
+    content =  content.replace(/<\/?span[^>]*>/g,"");
     if ( content == oldContent)
         return;
     
-  //  console.log(content);
+    console.log(content);
+    var lowContent = content.toLowerCase();
+    var ranges = [];
+    var found = [];
 
-    for ( var i=0; i<titles.length; i++){
-        var title = titles[i];
-        var p = content.indexOf(title);
-        if ( p != -1 ) {
-            var eid = entitiesMap[title];
-            var event = 'onmouseout="outHighlight()" onclick="clickHighlight('+eid+')"  onmouseover="overHighlight('+eid+')"';
-            var span = '<span class="entity" ' + event + ' data-entity-id="' + eid + '" >' + title + '</span>';
-            var reg = new RegExp(title,"g");
-      //      console.log(reg);
-            content = content.replace( reg , span);              
-        }
+    for ( var i=0; i<titles.length; i++){       
+        findEntity(lowContent, titles[i], ranges, found );
+    }
+   // console.log(ranges);
+    var newContent = replaceEntity(content, found );
+  //  console.log(newContent);
+    editorDiv.innerHTML = newContent;
+    oldContent = editorDiv.innerHTML;
+}
+
+function replaceEntity(content, found ){
+    found.sort( function compare(a , b) {
+        return a.range[0] - b.range[0];
+    });
+    console.log(found);
+     
+    var newContent ='';
+    var p = 0;
+    for ( var i=0; i<found.length; i++){
+        var title = found[i].title;
+        var range = found[i].range;
+        var str1 = content.substring(p,range[0] );
+        newContent +=str1;
+        var oriTitle = content.substring( range[0],range[1] );
+        var eid = entitiesMap[title];
+        var event = 'onmouseout="outHighlight()" onclick="clickHighlight('+eid+')"  onmouseover="overHighlight('+eid+')"';
+        var span = '<span class="entity" ' + event + ' data-entity-id="' + eid + '" >' + oriTitle + '</span>';
+        newContent += span;
+        p = range[1];
+    }
+    newContent += content.substring(p,content.length );
+    return newContent;   
+}
+
+function findEntity(lowContent, title, ranges, found ){
+     var start = 0;
+     var i = lowContent.indexOf( title, start); 
+     while( i != -1 ) {
+         if ( isValidPos(lowContent, title, i,  ranges) ) {
+             var range = [i,i+title.length];
+             ranges.push(range);
+             found.push( {"title": title, "range":range});
+         }
+         start = i+title.length;
+         i = lowContent.indexOf( title, start); 
+     } // while 
+} 
+
+function isValidPos( lowContent, title, i,  ranges ) {
+    var charSet = { ' ': true, '.': true, '(': true,  ')': true, 
+                    ',': true, '?': true, '!': true,  '\"':true, 
+                    '\'':true, '\<':true, '\>':true,  '\&':true,
+                    ';': true, '\r':true, '\n':true }; 
+    if ( i != 0  ) {
+       var preC =  lowContent.charAt(i-1);
+       if (  !(preC in charSet)  )
+          return false;
     }
     
-    editorDiv.innerHTML =  content;
-    oldContent = editorDiv.innerHTML;
+    if (  i+title.length != lowContent.length  ) {
+       var postC =  lowContent.charAt( i+title.length);
+       if (  !(postC in charSet)  )
+          return false;
+    }
+    
+    for (var j =0; j<ranges.length; j++){
+        var range = ranges[j];
+        if ( i>= range[0] && i<= range[1])
+            return false;
+    }    
+    return true;
 }
 
 function clickHighlight(eid) {
@@ -90,6 +177,8 @@ function overHighlight(eid) {
     
     titleDiv.innerHTML = '<h3>' + entity.title +'</h3>';
     descDiv.innerHTML =  entity.description ;
+    
+    pic.style.display = "none";
     pic.src = entity.image;
    
     adjustInfoPos();    
@@ -104,7 +193,10 @@ function adjustInfoPos(){
         x = window.innerWidth - 500 - 60;
         
     infoDiv.style.left = x+"px";
-    infoDiv.style.top = cursorY+15+"px";
-    
+    infoDiv.style.top = cursorY+15+"px";    
 }
 
+function imageLoad(){
+    var pic = document.getElementById("pic"); 
+    pic.style.display = "inline";
+}
