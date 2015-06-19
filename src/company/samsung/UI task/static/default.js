@@ -57,7 +57,7 @@ function initInputArea() {
 }
 
 function adjustHighlighter(){   
-    console.log(inputArea.offsetLeft);
+ //   console.log(inputArea.offsetLeft);
     highlighter.style.left = inputArea.offsetLeft+"px";
     highlighter.style.top = inputArea.offsetTop+"px";
     highlighter.style.height = inputArea.offsetHeight+"px";
@@ -101,18 +101,10 @@ function pageInit(){
             
     txtChange();
     oldContent = inputArea.value;
-    /*
-    setInterval( function() { 
-                    console.log("uuuuuuu ");
-                    }
-                   , 5000);
-                   * 
-                   * */
+    
 }
 
- function txtClick(evt){
-      //  console.log(evt);
-     //   forwardEvent(evt, highlighter) ;
+ function txtClick(evt){     
         
        // inputArea.style.visibility = "hidden";
         var x = evt.clientX, y = evt.clientY;
@@ -161,8 +153,7 @@ function txtMouseover(evt){
     var foundSpan = false;
     var span ;
     for (var i =0 ; i< spans.length ;i++) {
-        span = spans[i];
-        // var rect = spans[i].getBoundingClientRect();
+        span = spans[i];       
         if ( (offX >= span.offsetLeft) && ( offX <= span.offsetLeft+span.offsetWidth) 
             && (offY >= span.offsetTop) && ( offY <= span.offsetTop + span.offsetHeight ) ) {
             //  console.log( offX,offY );   
@@ -185,7 +176,7 @@ function showInfo(span){
   //  console.log(span);
     curSpan = span;
     var eid = span.getAttribute("data-entity-id");
-    console.log(eid);
+  //  console.log(eid);
     overHighlight(eid);    
 }
 
@@ -301,7 +292,7 @@ function outHighlight(){
 function overHighlight(eid) {
     var entity = entitydb[eid];
     var url = entity.url;
-    console.log("mouse over >>" + entity.title);
+ //   console.log("mouse over >>" + entity.title);
     
     var titleDiv = document.getElementById("title");
     var pic = document.getElementById("pic");        

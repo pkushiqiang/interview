@@ -1,6 +1,23 @@
 
 body {
     overflow-y:scroll;
+    font-family: Arial, Verdana;  
+}
+
+h1 {
+    text-align: center;
+    color: #444444;
+}
+
+#msg {
+     
+    margin-left: 70px;
+    height: 20px;
+    color: #333;
+ #   background-color: #f5f5f5;
+    border-color: #ddd;
+    width:650px;
+    padding: 10px;
 }
 
 #main-panel {
@@ -37,7 +54,7 @@ body {
 #info {
     position: fixed;
     margin-left: 750px; 
-    top:100px;
+    top:120px;
        
     background: white;
     resize:vertical; 
