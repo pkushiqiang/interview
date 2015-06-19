@@ -32,7 +32,7 @@
 
         </div>
                    
-        <textarea id="inputArea"   oninput="txtChange()" 
+        <textarea id="inputArea"   oninput="txtChange()" onclick="txtClick(event)"
             onmousemove="txtMouseover(event)" >    Blue's Clues is an American children's television series  dundee that premiered on United States Secretary of the Treasury in 1996.  libya  Hosted first by Steve Burns (pictured) and then by Donovan Patton, and produced by Scottish Parliament, Todd Kessler and who W Traci Paige  Gabriela Shalev Johnson, the show follows an animated blue-spotted  named Blue as she plays a game with the host and viewers, inviting their involvement.  Fourteenth Amendment to the United States Constitution    United States          </textarea>           
     </div>
                
@@ -47,6 +47,46 @@
         </div>
     </div>
     
+    <script type="text/javascript">
+var observe;
+if (window.attachEvent) {
+    observe = function (element, event, handler) {
+        element.attachEvent('on'+event, handler);
+    };
+}
+else {
+    observe = function (element, event, handler) {
+        element.addEventListener(event, handler, false);
+    };
+}
+function init () {
+    var text = document.getElementById('inputArea');
+    function resize () {
+        text.style.height = 'auto';
+        text.style.height = text.scrollHeight+'px';
+    }
+    /* 0-timeout to get the already changed text */
+    function delayedResize () {
+        window.setTimeout(resize, 0);
+    }
+  //  observe(text, 'change',  resize);
+    observe(text, 'cut',     delayedResize);
+    observe(text, 'paste',   delayedResize);
+    observe(text, 'drop',    delayedResize);
+    observe(text, 'keydown', delayedResize);
+    
+    observe(text, 'input',  resize);
+
+   /*
+    text.focus();
+    text.select();
+    resize();
+    
+    */
+}
+
+
+</script>
 
 </body>
 

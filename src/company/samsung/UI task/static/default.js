@@ -16,6 +16,8 @@ var copyDiv;
 var spans ;
 var rects ;
 
+var curSpan;
+
 initEntites();
 
 function initEntites(){
@@ -48,14 +50,36 @@ function pageInit(){
     inputArea= document.getElementById("inputArea");
     highlighter = document.getElementById("highlighter");
     copyDiv = document.getElementById("copy");
+    infoDiv = document.getElementById("info");
+            
+    init();        
             
     txtChange();
     oldContent = inputArea.value;
+    /*
     setInterval( function() { 
                     console.log("uuuuuuu ");
                     }
-                   , 2000);
+                   , 5000);
+                   * 
+                   * */
 }
+
+ function txtClick(evt){
+      //  console.log(evt);
+     //   forwardEvent(evt, highlighter) ;
+        
+        inputArea.style.visibility = "hidden";
+        var x = evt.clientX, y = evt.clientY,
+        ele = document.elementFromPoint(x, y);
+        inputArea.style.visibility = "visible";
+        console.log(ele); 
+        if ( ele.tagName == "SPAN") {
+             var eid = ele.getAttribute("data-entity-id");
+             clickHighlight(eid);
+        }
+}         
+           
 
 function txtChange(){
     var content = inputArea.value;
@@ -89,16 +113,40 @@ function txtMouseover(evt){
     var offY = evt.offsetY;
     
   //  console.log(offX, offY);
-    
+    var foundSpan = false;
+    var span ;
     for (var i =0 ; i< spans.length ;i++) {
-        var span = spans[i];
+        span = spans[i];
         // var rect = spans[i].getBoundingClientRect();
         if ( (offX >= span.offsetLeft) && ( offX <= span.offsetLeft+span.offsetWidth) 
             && (offY >= span.offsetTop) && ( offY <= span.offsetTop + span.offsetHeight ) ) {
-              console.log( offX,offY );   
-              console.log(spans[i]);   
+            //  console.log( offX,offY );   
+            //  console.log(spans[i]);               
+                foundSpan = true;
+                break;            
         }
-    } 
+    } // for
+    
+    if( foundSpan ) {
+        if ( !(curSpan === span) ) {
+            showInfo(span);
+        }
+    } else {
+        hideInfo();
+    }
+}
+
+function showInfo(span){
+  //  console.log(span);
+    curSpan = span;
+    var eid = span.getAttribute("data-entity-id");
+    console.log(eid);
+    overHighlight(eid);    
+}
+
+function hideInfo(){
+    curSpan = null;
+    infoDiv.style.visibility = "hidden";
 }
             
 function showInOthers(content){
@@ -112,13 +160,7 @@ function showInOthers(content){
     highlighter.innerHTML =   newContent;
     copy.innerHTML =   newContent;
 };
-
-function catchCursor(){
-     var char = 7; // character at which to place caret  content.focus();
-     var sel = window.getSelection();
-     console.log( editorDiv.innerHTML );
-     sel.collapse(editorDiv.firstChild, char);
-}
+ 
 
 function getShowText(content){
     
