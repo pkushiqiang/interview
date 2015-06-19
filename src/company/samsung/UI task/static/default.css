@@ -83,7 +83,9 @@ body {
   
                         
 #highlighter  {
-
+    pointer-events: none;
+    background-color: transparent;
+    
     position:         absolute;
     left:             30px;
     top:              30px;

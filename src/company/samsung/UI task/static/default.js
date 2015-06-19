@@ -69,10 +69,12 @@ function pageInit(){
       //  console.log(evt);
      //   forwardEvent(evt, highlighter) ;
         
-        inputArea.style.visibility = "hidden";
-        var x = evt.clientX, y = evt.clientY,
+       // inputArea.style.visibility = "hidden";
+        var x = evt.clientX, y = evt.clientY;
+        highlighter.style.pointerEvents = "auto";
         ele = document.elementFromPoint(x, y);
-        inputArea.style.visibility = "visible";
+        highlighter.style.pointerEvents = "none";
+      //  inputArea.style.visibility = "visible";
         console.log(ele); 
         if ( ele.tagName == "SPAN") {
              var eid = ele.getAttribute("data-entity-id");
