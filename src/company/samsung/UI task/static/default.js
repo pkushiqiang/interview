@@ -1,6 +1,6 @@
 
 var oldContent;
-var editorDiv ;
+
 var infoDiv ;
 
 var cursorX;
@@ -8,6 +8,15 @@ var cursorY;
 
 var  entitiesMap = {};
 var  titles = [];
+
+var inputArea;  
+var highlighter;  
+var copyDiv;  
+ 
+var spans ;
+var rects ;
+
+initEntites();
 
 function initEntites(){
      for (  var i=0; i<entitydb.length; i++ ) {
@@ -36,25 +45,73 @@ function initEntites(){
 
 function pageInit(){
     initEntites();
- //   console.log(oldContent);
-    editorDiv = document.getElementById("editor");
-    infoDiv = document.getElementById("info");
-    
-    render();
-    oldContent = editorDiv.innerHTML;
-    
+    inputArea= document.getElementById("inputArea");
+    highlighter = document.getElementById("highlighter");
+    copyDiv = document.getElementById("copy");
+            
+    txtChange();
+    oldContent = inputArea.value;
+    setInterval( function() { 
+                    console.log("uuuuuuu ");
+                    }
+                   , 2000);
+}
 
-    document.onmousemove = function(e){
-        cursorX = e.pageX;
-        cursorY = e.pageY;
-      //  console.log("X="+cursorX + " ,Y="+cursorY );
+function txtChange(){
+    var content = inputArea.value;
+ //   console.log(content);
+    
+    showInOthers(content);
+    scanHigh();
+}
+
+function scanHigh(){
+    console.log(highlighter.children); 
+    spans = [];
+    
+    for (var i =0 ; i< highlighter.children.length ;i++) {
+        var ele = highlighter.children[i];
+        var name = ele.tagName;
+     //    console.log(name);
+        if ( name == "SPAN") {
+            spans.push(ele);
+            var rect = ele.getBoundingClientRect();
+            console.log(rect.left, rect.right, rect.top, rect.bottom);
+        }
     }
+    console.log(spans);    
+    rects = []; 
 }
 
-function editorPaste(){
-    console.log("paste 111");
-    render();
+function txtMouseover(evt){
+    
+    var offX = evt.offsetX;
+    var offY = evt.offsetY;
+    
+  //  console.log(offX, offY);
+    
+    for (var i =0 ; i< spans.length ;i++) {
+        var span = spans[i];
+        // var rect = spans[i].getBoundingClientRect();
+        if ( (offX >= span.offsetLeft) && ( offX <= span.offsetLeft+span.offsetWidth) 
+            && (offY >= span.offsetTop) && ( offY <= span.offsetTop + span.offsetHeight ) ) {
+              console.log( offX,offY );   
+              console.log(spans[i]);   
+        }
+    } 
 }
+            
+function showInOthers(content){
+    if ( oldContent == content )
+        return;    
+    
+    var newContent =  content;
+    newContent = getShowText(content);   
+    oldContent = newContent;
+    
+    highlighter.innerHTML =   newContent;
+    copy.innerHTML =   newContent;
+};
 
 function catchCursor(){
      var char = 7; // character at which to place caret  content.focus();
@@ -63,18 +120,7 @@ function catchCursor(){
      sel.collapse(editorDiv.firstChild, char);
 }
 
-function render(){
-    var editorDiv = document.getElementById("editor");
-//    console.log(editorDiv);     
-    var content = editorDiv.innerHTML;
-    if ( oldContent == content )
-        return;
-        
-  //  console.log(content);
-   // content =  content.replace(/<(?:.|\n)*?>/gm, '');
-    content =  content.replace(/<\/?span[^>]*>/g,"");
-    if ( content == oldContent)
-        return;
+function getShowText(content){
     
     console.log(content);
     var lowContent = content.toLowerCase();
@@ -87,8 +133,7 @@ function render(){
    // console.log(ranges);
     var newContent = replaceEntity(content, found );
   //  console.log(newContent);
-    editorDiv.innerHTML = newContent;
-    oldContent = editorDiv.innerHTML;
+    return newContent;
 }
 
 function replaceEntity(content, found ){
@@ -106,8 +151,8 @@ function replaceEntity(content, found ){
         newContent +=str1;
         var oriTitle = content.substring( range[0],range[1] );
         var eid = entitiesMap[title];
-        var event = 'onmouseout="outHighlight()" onclick="clickHighlight('+eid+')"  onmouseover="overHighlight('+eid+')"';
-        var span = '<span class="entity" ' + event + ' data-entity-id="' + eid + '" >' + oriTitle + '</span>';
+      //  var event = 'onmouseout="outHighlight()" onclick="clickHighlight('+eid+')"  onmouseover="overHighlight('+eid+')"';
+        var span = '<span class="entity" '  + ' data-entity-id="' + eid + '" >' + oriTitle + '</span>';
         newContent += span;
         p = range[1];
     }
