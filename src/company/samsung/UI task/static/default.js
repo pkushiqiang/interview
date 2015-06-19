@@ -112,7 +112,7 @@ function pageInit(){
         ele = document.elementFromPoint(x, y);
         highlighter.style.pointerEvents = "none";
       //  inputArea.style.visibility = "visible";
-        console.log(ele); 
+      //  console.log(ele); 
         if ( ele.tagName == "SPAN") {
              var eid = ele.getAttribute("data-entity-id");
              clickHighlight(eid);
@@ -144,12 +144,12 @@ function scanHigh(){
     rects = []; 
 }
 
-function txtMouseover(evt){
+function txtMouseover(evt){    
+   
+    var offX = evt.offsetX==undefined? evt.layerX: evt.offsetX;
+    var offY = evt.offsetY==undefined? evt.layerY: evt.offsetY;
     
-    var offX = evt.offsetX;
-    var offY = evt.offsetY;
-    
-  //  console.log(offX, offY);
+   // console.log(offX, offY);
     var foundSpan = false;
     var span ;
     for (var i =0 ; i< spans.length ;i++) {
@@ -280,7 +280,7 @@ function isValidPos( lowContent, title, i,  ranges ) {
 function clickHighlight(eid) {
     var entity = entitydb[eid];
     var url = entity.url;
-    console.log(url);
+ //   console.log(url);
     var win = window.open(url, '_blank');
     win.focus();
 }
@@ -292,7 +292,7 @@ function outHighlight(){
 function overHighlight(eid) {
     var entity = entitydb[eid];
     var url = entity.url;
- //   console.log("mouse over >>" + entity.title);
+  //  console.log("mouse over >>" + entity.title);
     
     var titleDiv = document.getElementById("title");
     var pic = document.getElementById("pic");        

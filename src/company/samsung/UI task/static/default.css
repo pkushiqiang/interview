@@ -125,7 +125,7 @@ h1 {
     opacity:0.6;
     word-wrap: break-word;
     word-break: normal;
-    white-space:pre;
+    white-space:pre-wrap;
     resize:none; 
     overflow:auto; 
 } 
@@ -150,7 +150,7 @@ h1 {
     
     word-wrap: break-word;
     word-break: normal;
-    white-space:pre;
+    white-space:pre-wrap;
     resize:vertical;
     min-height:       400px;  
 }
@@ -169,7 +169,7 @@ h1 {
     font-size: 16px;
     word-wrap: break-word;
     word-break: normal;
-    white-space:pre;
+    white-space:pre-wrap;
     resize:vertical;
     min-height:       400px;  
     
@@ -181,5 +181,7 @@ h1 {
    # background-color: red;
     height: 100px;
 }
+
+@-moz-document domain(<domain>){ textarea { white-space:pre-wrap!important; word-wrap:break-word!important; } }
 
 
