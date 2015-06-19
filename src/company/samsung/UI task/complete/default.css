@@ -1,0 +1,187 @@
+
+body {
+    overflow-y:scroll;
+    font-family: Arial, Verdana;  
+}
+
+h1 {
+    text-align: center;
+    color: #444444;
+}
+
+#msg {
+     
+    margin-left: 70px;
+    height: 20px;
+    color: #333;
+ #   background-color: #f5f5f5;
+    border-color: #ddd;
+    width:650px;
+    padding: 10px;
+}
+
+#main-panel {
+    resize:vertical;     
+    width: 750px;
+    margin-top: 0px;
+    margin-bottom: 100px;
+    margin-right: 20px;
+    margin-left: 20px;  
+    float: left;  
+}
+
+#editor {
+    resize:vertical; 
+    overflow:auto; 
+    border:1px solid silver; 
+    border-radius:5px; 
+    min-height:300px;
+    
+    box-shadow: inset 0 0 10px silver;
+    padding:1em;
+    
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.entity {
+    color:red;
+
+}
+
+#info {
+    position: fixed;
+    margin-left: 750px; 
+    top:120px;
+       
+    background: white;
+    resize:vertical; 
+    width:500px;
+    min-height:100px;
+     
+    border:1px solid #999999; 
+    border-radius:5px; 
+    
+   
+    padding:1em;  
+    visibility: hidden; 
+    box-shadow: 5px 5px 1px #dddddd;
+   
+}
+
+#pic {
+  float:left; 
+  width:150px;  
+  max-width:100%;
+  height:auto;  
+  display:none;
+  
+  margin-top: 10px; 
+  margin-bottom: 10px;
+  margin-right: 20px;
+  margin-left: 10px; 
+}
+
+#title {
+   margin-top: -15px; 
+}
+
+
+#container {
+    position:  relative;
+    border:1px solid silver; 
+    border-radius:5px;  
+    box-shadow: inset 0 0 10px silver;
+    padding: 20px;
+    
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 70px;
+    
+    width:620px;
+    height:auto;  
+    resize:vertical; 
+}
+
+#inputArea  {
+    position:         relative;
+    background-color: transparent;
+    padding:          0px;
+    margin:           0px;
+  
+    width:            620px;
+    min-height:       400px;   
+    
+    left:             0px;
+    top:              0px;    
+    font-family: "Courier New", Monospace;   
+    font-size: 16px;
+    
+    border:           1px solid transparent;
+    
+    opacity:0.6;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space:pre-wrap;
+    resize:none; 
+    overflow:auto; 
+} 
+  
+                        
+#highlighter  {
+    pointer-events: none;
+    background-color: transparent;
+    
+    position:         absolute;
+    left:             30px;
+    top:              30px;
+    border:           1px solid transparent;
+    width:            600px;
+    
+    
+    padding:          0px;
+    margin:           0px;
+    
+    font-family: "Courier New", Monospace;   
+    font-size: 16px;
+    
+    word-wrap: break-word;
+    word-break: normal;
+    white-space:pre-wrap;
+    resize:vertical;
+    min-height:       400px;  
+}
+                        
+
+#copy  {
+    
+    position:         absolute;
+    left:             660px;
+    top:              30px;
+    border:           1px solid #000000;
+    width:            600px;
+    
+    
+    font-family: "Courier New", Monospace;   
+    font-size: 16px;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space:pre-wrap;
+    resize:vertical;
+    min-height:       400px;  
+    
+    display: none;
+}
+           
+           
+#footer{
+   # background-color: red;
+    height: 100px;
+}
+
+@-moz-document domain(<domain>){ textarea { white-space:pre-wrap!important; word-wrap:break-word!important; } }
+
+
