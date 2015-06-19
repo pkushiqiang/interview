@@ -181,19 +181,12 @@ function overHighlight(eid) {
     pic.style.display = "none";
     pic.src = entity.image;
    
-    adjustInfoPos();    
+  //  adjustInfoPos();    
     infoDiv.style.visibility = "visible";
 }
 
-function adjustInfoPos(){
-    var x = cursorX - 80;
-    if (x<=0)
-        x = 10;
-    if ( x + 500 > window.innerWidth )
-        x = window.innerWidth - 500 - 60;
-        
-    infoDiv.style.left = x+"px";
-    infoDiv.style.top = cursorY+15+"px";    
+function adjustInfoPos(){   
+   // infoDiv.style.top = cursorY - 80+"px";    
 }
 
 function imageLoad(){

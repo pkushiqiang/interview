@@ -5,11 +5,12 @@ body {
 
 #main-panel {
     resize:vertical;     
-    
+    width: 750px;
     margin-top: 0px;
     margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 150px;
+    margin-right: 20px;
+    margin-left: 20px;  
+    float: left;  
 }
 
 #editor {
@@ -34,28 +35,27 @@ body {
 }
 
 #info {
-   
-    position: absolute;
-    top:50px;
-    left:200px;     
+    position: fixed;
+    margin-left: 780px; 
+    top:100px;
+       
     background: white;
     resize:vertical; 
     width:500px;
+    min-height:100px;
      
     border:1px solid #999999; 
     border-radius:5px; 
-    min-height:200px;
+    
    
-    padding:1em;
-     
-    z-index:0;  
+    padding:1em;  
     visibility: hidden; 
     box-shadow: 5px 5px 1px #dddddd;
 }
 
 #pic {
   float:left; 
-  width:200px;  
+  width:150px;  
   max-width:100%;
   height:auto;  
   display:none;
