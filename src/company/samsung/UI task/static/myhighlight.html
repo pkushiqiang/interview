@@ -120,12 +120,19 @@
             function txtClick(evt){
               //  console.log(evt);
                 forwardEvent(evt, highlighter) ;
+                
+                txt.style.visibility = "hidden";
+                var x = evt.clientX, y = evt.clientY,
+                elementMouseIsOver = document.elementFromPoint(x, y);
+                txt.style.visibility = "visible";
+                console.log(elementMouseIsOver); 
             }
             
             function highClick(evt){
-                console.log("highClick highClick highClick");
-              //  console.log(evt);
-                 
+             //   console.log("highClick highClick highClick");
+             //   console.log(evt);
+               
+                
             }
             
 
