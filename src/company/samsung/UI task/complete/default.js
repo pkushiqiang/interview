@@ -1,8 +1,6 @@
 
 var oldContent;
-
 var infoDiv ;
-
 var cursorX;
 var cursorY;
 
@@ -11,13 +9,11 @@ var  titles = [];
 
 var inputArea;  
 var highlighter;  
-var copyDiv;  
- 
+var copyDiv;   
 var spans ;
 var rects ;
 
 var curSpan;
-
 var observe;
 if (window.attachEvent) {
     observe = function (element, event, handler) {
@@ -47,13 +43,7 @@ function initInputArea() {
     observe(text, 'drop',    delayedResize);
     observe(text, 'keydown', delayedResize);
     
-    observe(text, 'input',  resize);
-   /*
-    text.focus();
-    text.select();
-    resize();
-    
-    */
+    observe(text, 'input',  resize);  
 }
 
 function adjustHighlighter(){   
@@ -81,11 +71,6 @@ function initEntites(){
              return a - b;
          } 
      }); 
-     /* 
-     for (var i=0; i< titles.length; i++){
-         console.log(titles[i]);
-     }  
-     * */  
 }
     
 
@@ -100,19 +85,16 @@ function pageInit(){
     adjustHighlighter();     
             
     txtChange();
-    oldContent = inputArea.value;
-    
+    oldContent = inputArea.value;    
 }
 
  function txtClick(evt){     
-        
-       // inputArea.style.visibility = "hidden";
+
         var x = evt.clientX, y = evt.clientY;
         highlighter.style.pointerEvents = "auto";
         ele = document.elementFromPoint(x, y);
         highlighter.style.pointerEvents = "none";
-      //  inputArea.style.visibility = "visible";
-      //  console.log(ele); 
+      
         if ( ele.tagName == "SPAN") {
              var eid = ele.getAttribute("data-entity-id");
              clickHighlight(eid);
@@ -121,9 +103,7 @@ function pageInit(){
            
 
 function txtChange(){
-    var content = inputArea.value;
- //   console.log(content);
-    
+    var content = inputArea.value; 
     showInOthers(content);
     scanHigh();
 }
@@ -302,14 +282,9 @@ function overHighlight(eid) {
     descDiv.innerHTML =  entity.description ;
     
     pic.style.display = "none";
-    pic.src = entity.image;
-   
+    pic.src = entity.image;   
   //  adjustInfoPos();    
     infoDiv.style.visibility = "visible";
-}
-
-function adjustInfoPos(){   
-   // infoDiv.style.top = cursorY - 80+"px";    
 }
 
 function imageLoad(){
