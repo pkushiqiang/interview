@@ -117,7 +117,9 @@ function pageInit(){
     initInputArea();   
     adjustHighlighter();
     processBrowers();
-         
+    
+    inputArea.style.height = 'auto';
+    inputArea.style.height = inputArea.scrollHeight+'px';    
             
     txtChange();
     oldContent = inputArea.value;
