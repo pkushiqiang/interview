@@ -26,3 +26,4 @@ mynote/*.out
 .classpath
 .project
 src/company/samsung/UI task/*.zip
+src/company/samsung/UI task/~*

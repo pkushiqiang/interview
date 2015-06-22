@@ -19,6 +19,10 @@ var rects ;
 var curSpan;
 var observe;
 
+var bigSearch = true;
+var smallTitles = [];
+var smallTitleSet = {};
+
 function get_browser_info(){
     var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
     if(/trident/i.test(M[1])){
@@ -49,8 +53,6 @@ if (window.attachEvent) {
         element.addEventListener(event, handler, false);
     };
 }
-
-initEntites();
 
 function initInputArea() {
     var text = document.getElementById('inputArea');
@@ -122,8 +124,16 @@ function pageInit(){
     inputArea.style.height = inputArea.scrollHeight+'px';    
             
     txtChange();
-    oldContent = inputArea.value;
+    oldContent = inputArea.value;   
     
+    setInterval( function(){  
+        bigSearch=true; 
+        }, 2000);  
+        
+    setInterval( function(){  
+        bigSearch=true; 
+        txtChange();
+        }, 8000);  
 }
 
  function txtClick(evt){     
@@ -206,29 +216,58 @@ function hideInfo(){
     curSpan = null;
     infoDiv.style.visibility = "hidden";
 }
+
+function addToSmallTitles(found) {
+    for (var i=0; i<found.length; i++) {
+        var title = found[i].title;
+    
+        if ( ! (title in smallTitleSet) ) {
+            smallTitleSet[title] = true;
+            smallTitles.push(title);
+        }    
+    }
+    
+    smallTitles.sort( function (a , b) {
+         if ( a.length > b.length ) {
+             return -1;
+         } else if ( a.length < b.length ) {
+             return 1;
+         } else {
+             return a - b;
+         } 
+     });          
+}
             
 function showInOthers(content){
     if ( oldContent == content )
         return;    
     
+    var ranges = [];
+    var found = [];
+    var tmpTitles = (bigSearch)? titles:smallTitles;
+    
     var newContent =  content;
-    newContent = getShowText(content);   
+    newContent = getShowText(content, tmpTitles,  ranges, found);   
     oldContent = newContent;
     
     highlighter.innerHTML =   newContent;
     copy.innerHTML =   newContent;
+    
+    if (bigSearch ) {
+        bigSearch = false;
+        addToSmallTitles(found);
+    }
 };
+
  
 
-function getShowText(content){
+function getShowText(content, tmpTitles,  ranges, found){
     
   //  console.log(content);
     var lowContent = content.toLowerCase();
-    var ranges = [];
-    var found = [];
-
-    for ( var i=0; i<titles.length; i++){       
-        findEntity(lowContent, titles[i], ranges, found );
+        
+    for ( var i=0; i<tmpTitles.length; i++){       
+        findEntity(lowContent, tmpTitles[i], ranges, found );
     }
    // console.log(ranges);
     var newContent = replaceEntity(content, found );
