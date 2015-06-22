@@ -241,14 +241,14 @@ function addToSmallTitles(found) {
 function showInOthers(content){
     if ( oldContent == content )
         return;    
-    
+    oldContent = content;
     var ranges = [];
     var found = [];
     var tmpTitles = (bigSearch)? titles:smallTitles;
     
     var newContent =  content;
     newContent = getShowText(content, tmpTitles,  ranges, found);   
-    oldContent = newContent;
+    
     
     highlighter.innerHTML =   newContent;
     copy.innerHTML =   newContent;
