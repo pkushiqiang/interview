@@ -136,14 +136,13 @@ function pageInit(){
         }, 8000);  
 }
 
- function txtClick(evt){     
-        
-       // inputArea.style.visibility = "hidden";
+ function txtClick(evt){             
+       
         var x = evt.clientX, y = evt.clientY;
         highlighter.style.pointerEvents = "auto";
         ele = document.elementFromPoint(x, y);
         highlighter.style.pointerEvents = "none";
-      //  inputArea.style.visibility = "visible";
+     
       //  console.log(ele); 
         if ( ele.tagName == "SPAN") {
              var eid = ele.getAttribute("data-entity-id");
@@ -344,10 +343,6 @@ function clickHighlight(eid) {
  //   console.log(url);
     var win = window.open(url, '_blank');
     win.focus();
-}
-
-function outHighlight(){
-    infoDiv.style.visibility = "hidden";
 }
 
 function overHighlight(eid) {
