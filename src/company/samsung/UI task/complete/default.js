@@ -1,6 +1,8 @@
 
 var oldContent;
+
 var infoDiv ;
+
 var cursorX;
 var cursorY;
 
@@ -9,12 +11,35 @@ var  titles = [];
 
 var inputArea;  
 var highlighter;  
-var copyDiv;   
+var copyDiv;  
+ 
 var spans ;
 var rects ;
 
 var curSpan;
 var observe;
+
+function get_browser_info(){
+    var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+    if(/trident/i.test(M[1])){
+        tem=/\brv[ :]+(\d+)/g.exec(ua) || []; 
+        return {name:'IE',version:(tem[1]||'')};
+        }   
+    if(M[1]==='Chrome'){
+        tem=ua.match(/\bOPR\/(\d+)/)
+        if(tem!=null)   {return {name:'Opera', version:tem[1]};}
+        }   
+    M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+    return {
+      name: M[0],
+      version: M[1]
+    };
+}
+
+var browser=get_browser_info();
+// console.log(browser);
+
 if (window.attachEvent) {
     observe = function (element, event, handler) {
         element.attachEvent('on'+event, handler);
@@ -43,7 +68,7 @@ function initInputArea() {
     observe(text, 'drop',    delayedResize);
     observe(text, 'keydown', delayedResize);
     
-    observe(text, 'input',  resize);  
+    observe(text, 'input',  resize);   
 }
 
 function adjustHighlighter(){   
@@ -70,7 +95,15 @@ function initEntites(){
          } else {
              return a - b;
          } 
-     }); 
+     });      
+}
+
+function processBrowers(){
+    if ( browser.name == "Firefox" ){
+        inputArea.style.whiteSpace = "pre-wrap";
+        highlighter.style.whiteSpace = "pre-wrap";
+        copyDiv.style.whiteSpace = "pre-wrap";
+    } 
 }
     
 
@@ -79,22 +112,29 @@ function pageInit(){
     inputArea= document.getElementById("inputArea");
     highlighter = document.getElementById("highlighter");
     copyDiv = document.getElementById("copy");
-    infoDiv = document.getElementById("info");
+    infoDiv = document.getElementById("info");    
             
     initInputArea();   
-    adjustHighlighter();     
+    adjustHighlighter();
+    processBrowers();
+    
+    inputArea.style.height = 'auto';
+    inputArea.style.height = inputArea.scrollHeight+'px';    
             
     txtChange();
-    oldContent = inputArea.value;    
+    oldContent = inputArea.value;
+    
 }
 
  function txtClick(evt){     
-
+        
+       // inputArea.style.visibility = "hidden";
         var x = evt.clientX, y = evt.clientY;
         highlighter.style.pointerEvents = "auto";
         ele = document.elementFromPoint(x, y);
         highlighter.style.pointerEvents = "none";
-      
+      //  inputArea.style.visibility = "visible";
+      //  console.log(ele); 
         if ( ele.tagName == "SPAN") {
              var eid = ele.getAttribute("data-entity-id");
              clickHighlight(eid);
@@ -103,7 +143,9 @@ function pageInit(){
            
 
 function txtChange(){
-    var content = inputArea.value; 
+    var content = inputArea.value;
+ //   console.log(content);
+    
     showInOthers(content);
     scanHigh();
 }
@@ -282,7 +324,8 @@ function overHighlight(eid) {
     descDiv.innerHTML =  entity.description ;
     
     pic.style.display = "none";
-    pic.src = entity.image;   
+    pic.src = entity.image;
+   
   //  adjustInfoPos();    
     infoDiv.style.visibility = "visible";
 }
