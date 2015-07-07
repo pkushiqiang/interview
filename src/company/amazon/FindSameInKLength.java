@@ -1,7 +1,7 @@
 package amazon;
 import java.util.*;
 public class FindSameInKLength {
-	
+	 Map<Integer, int[]> map = new HashMap<>();
 	public static boolean findSameInK(int[] A, int k) {
 		if (A ==null || A.length <2)
 				return false;
