@@ -30,11 +30,14 @@ public class RepeatableCombination {
 	
 	public static void printRes(int[] A, int k) {
 		List<List<Integer>> res = repeatableCombination(A, k);
+		System.out.println("\n\n------------" + k + "-----------size=" + res.size());
 		for (List<Integer> list : res) {
+			int pro  = 1;
 			for (int i : list) {
 				System.out.print(i + "  ");
+				pro *=i;
 			}
-			System.out.println();
+			System.out.println( "  ="+pro);
 		}
 	}
 
@@ -42,7 +45,7 @@ public class RepeatableCombination {
 		// TODO Auto-generated method stub
 		int[] A = { 3, 5, 7 };
 		for (int k=0; k<7; k++) {
-			System.out.println("\n\n------------" + k + "------------");
+			
 			printRes(  A,   k) ;
 			
 		}
