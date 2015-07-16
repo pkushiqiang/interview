@@ -1,4 +1,4 @@
-package mynote.binarytree;
+package mynote.datastructure.tree;
 
 
 import java.util.*;

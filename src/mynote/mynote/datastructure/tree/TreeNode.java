@@ -1,4 +1,4 @@
-package mynote.binarytree;
+package mynote.datastructure.tree;
 
 public class TreeNode {
      int val;

@@ -1,4 +1,4 @@
-package mynote.stack;
+package mynote.datastructure.stack;
 
 import java.util.Stack;
 
