@@ -1,4 +1,4 @@
-package mynote.multithread;
+package mynote.multithread.lock;
 
 import java.util.Random;
 import java.util.concurrent.locks.ReadWriteLock;
