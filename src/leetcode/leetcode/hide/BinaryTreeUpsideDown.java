@@ -47,8 +47,8 @@ package leetcode.hide;
  * 
  */
 
-import mynote.binarytree.TreeNode;
-import mynote.binarytree.TreeUtil;
+import mynote.datastructure.tree.TreeNode;
+import mynote.datastructure.tree.TreeUtil;
 
 import java.util.*;
 public class BinaryTreeUpsideDown {
