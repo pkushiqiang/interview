@@ -1,4 +1,4 @@
-package mynote.java.basic;
+package mynote.containers;
 import java.util.*;
 public class LearnPriorityQueue {
 	
