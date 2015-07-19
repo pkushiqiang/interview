@@ -9,7 +9,7 @@ public class LearnComparator {
 		// TODO Auto-generated method stub
 		String[] names = {"Alice","Bob","Clyde"};
 		int[] ages = {30,17,49};
-		Map<String, Integer> map = new HashMap<>();
+		final Map<String, Integer> map = new HashMap<>();
 		for (int i=0; i<names.length; i++) 
 			map.put(names[i], ages[i]);
 		
